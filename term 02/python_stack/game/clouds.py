@@ -9,8 +9,7 @@ class Clouds:
         self.h = h
         self.cells = [[0 for i in range(w)] for j in range(h)]
 
-    def update(self, r = 1, mxr = 50, g = 1, mxg = 50):
-
+    def update(self, r=1, mxr=50, g=1, mxg=50):
         for i in range(self.h):
             for j in range(self.w):
                 if randbool(r, mxr):
@@ -19,3 +18,9 @@ class Clouds:
                         self.cells[i][j] = 2
                 else:
                     self.cells[i][j] = 0
+
+    def export_data(self):
+        return {"cells": self.cells}
+
+    def import_data(self, data):
+        self.cells = data['cells'] or [[0 for i in range(self.w)] for j in range(self.h)]

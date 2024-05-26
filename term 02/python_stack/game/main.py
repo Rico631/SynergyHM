@@ -2,6 +2,7 @@ from pynput import keyboard
 from pynput.keyboard import Key
 import time
 import os
+import json
 from clouds import Clouds
 from map import Map
 from helicopter import Helicopter as Heli
@@ -18,13 +19,37 @@ MOVES = {Key.up: (-1, 0), Key.right: (0, 1),
 field = Map(MAP_W, MAP_H)
 heli = Heli(MAP_W, MAP_H)
 clouds = Clouds(MAP_W, MAP_H)
+tick = 1
+
+# f - save
+# g - load
 
 
-def on_release(key):
-    global heli
+def on_release(key: Key):
+    global field, heli, clouds, tick
+    if hasattr(key, 'char'):
+        c = key.char.lower()
+        # Save
+        if c == 'f':
+            data = {'heli': heli.export_data(),
+                    'clouds': clouds.export_data(),
+                    'field': field.export_data(),
+                    'tick': tick}
+            with open('level.json', 'w') as lvl:
+                json.dump(data, lvl)
+        # Load
+        elif c == 'g':
+            with open('level.json', 'r') as lvl:
+                data = json.load(lvl)
+                heli.import_data(data['heli'])
+                tick = data['tick'] or 1
+                clouds.import_data(data['clouds'])
+                field.import_data(data['field'])
+
     if key in MOVES.keys():
         dx, dy = MOVES[key][0], MOVES[key][1]
         heli.move(dx, dy)
+
     # c = key.char.lower()
     # if c in MOVES.keys():
     #     dx, dy = MOVES[c][0], MOVES[c][1]
@@ -36,7 +61,6 @@ listener = keyboard.Listener(
     on_release=on_release)
 listener.start()
 
-tick = 1
 
 while True:
     os.system('cls')

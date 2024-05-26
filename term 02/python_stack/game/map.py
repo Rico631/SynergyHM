@@ -102,10 +102,16 @@ class Map:
             heli.mxtank += 1
             heli.score -= UPGRADE_COST
         if c == 4 and heli.score >= LIFE_COST:
-            heli.lifes += 1
+            heli.lives += 1
             heli.score -= LIFE_COST
         if d == 2:
-            heli.lifes -= 1
-            if heli.lifes == 0:
+            heli.lives -= 1
+            if heli.lives == 0:
                 print(f'GAME OVER, YOUR SCORE IS {heli.score}')
                 exit(0)
+
+    def export_data(self):
+        return {"cells": self.cells}
+
+    def import_data(self, data):
+        self.cells = data['cells'] or [[0 for i in range(self.w)] for j in range(self.h)]

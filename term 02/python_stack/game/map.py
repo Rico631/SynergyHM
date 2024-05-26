@@ -1,9 +1,12 @@
+from clouds import Clouds
 from utils import *
-from helicopter import Helicopter as Heli
+from helicopter import Helicopter
 
-CELL_TYPES = '🟩🌲🌊🏥🏪🔥🚁⬛'
+CELL_TYPES = '🟩🌲🌊🏥🏪🔥🚁🏥⛅🌦️⬛'
 TREE_BONUS = 100
 UPGRADE_COST = 300
+LIFE_COST = 300
+
 
 class Map:
 
@@ -16,19 +19,24 @@ class Map:
         self.generate_river(10)
         self.generate_river(10)
         self.generate_upgrade_shop()
+        self.generate_hospital()
 
     def check_bounds(self, x: int, y: int) -> bool:
         if x < 0 or y < 0 or x >= self.h or y >= self.w:
             return False
         return True
 
-    def print_map(self, heli: Heli):
+    def print_map(self, heli: Helicopter, clouds: Clouds):
         print(CELL_TYPES[-1] * (self.w + 2))
         for ri in range(self.h):
             print(CELL_TYPES[-1], end='')
             for ci in range(self.w):
                 cell = self.cells[ri][ci]
-                if heli.x == ri and heli.y == ci:
+                if clouds.cells[ri][ci] == 1:
+                    print(CELL_TYPES[8], end='')
+                elif clouds.cells[ri][ci] == 2:
+                    print(CELL_TYPES[9], end='')
+                elif heli.x == ri and heli.y == ci:
                     print(CELL_TYPES[6], end='')
                 elif cell >= 0 and cell < len(CELL_TYPES):
                     print(CELL_TYPES[cell], end='')
@@ -74,8 +82,16 @@ class Map:
         cx, cy = randcell(self.w, self.h)
         self.cells[cx][cy] = 4
 
-    def proccess_heli(self, heli: Heli):
+    def generate_hospital(self):
+        cx, cy = randcell(self.w, self.h)
+        if self.cells[cx][cy] != 4:
+            self.cells[cx][cy] = 7
+        else:
+            self.generate_hospital()
+
+    def proccess_heli(self, heli: Helicopter, clouds: Clouds):
         c = self.cells[heli.x][heli.y]
+        d = clouds.cells[heli.x][heli.y]
         if c == 2:
             heli.tank = heli.mxtank
         if c == 5 and heli.tank > 0:
@@ -85,4 +101,11 @@ class Map:
         if c == 4 and heli.score >= UPGRADE_COST:
             heli.mxtank += 1
             heli.score -= UPGRADE_COST
-
+        if c == 4 and heli.score >= LIFE_COST:
+            heli.lifes += 1
+            heli.score -= LIFE_COST
+        if d == 2:
+            heli.lifes -= 1
+            if heli.lifes == 0:
+                print(f'GAME OVER, YOUR SCORE IS {heli.score}')
+                exit(0)

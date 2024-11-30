@@ -1,0 +1,248 @@
+* {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+header h1 .material-icons {
+  color: orange;
+  font-size: 36px;
+}
+
+header .center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.form-search {
+  display: flex;
+  padding-right: 100px;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-search div {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.form-search-input {
+  padding: 5px;
+  padding-left: 35px;
+  font-size: 18px;
+  width: 400px;
+  border: 0px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.form-search button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.form-search-button:first-of-type {
+  left: 8px;
+}
+
+.form-search-clear:last-of-type {
+  right: 8px;
+}
+
+.download-notes-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 36px;
+  color: #555;
+}
+
+.download-notes-button:hover {
+  color: #ccc;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+}
+
+main .create-note {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 16px;
+  border: 1px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  width: 400px;
+  align-items: center;
+  margin-top: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.create-note-title {
+  padding: 8px;
+  font-size: 18px;
+  border: 0px;
+  border-radius: 4px;
+  width: 100%;
+  outline: none;
+  background-color: transparent;
+}
+
+.create-note-text {
+  padding: 8px;
+  border: 0px;
+  width: 100%;
+  max-height: 500px;
+  outline: none;
+  background-color: transparent;
+  resize: none;
+  height: 80px;
+}
+
+.create-note-control {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+.create-note-close {
+  padding: 8px 16px;
+  border: none;
+  color: black;
+  background: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.create-note-close:hover {
+  background-color: lightgrey;
+}
+
+.note-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.note-updated {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-size: 12px;
+  color: #555;
+  cursor: help;
+}
+
+.note-card {
+  position: relative;
+  flex: 1 1 calc(25% - 16px);
+  max-width: 400px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.note-card h2 {
+  font-size: 20px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.note-card p {
+  font-size: 14px;
+  margin: 10px 0 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  flex-grow: 0;
+}
+
+.note-card-actions {
+  bottom: 16px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-button,
+.delete-button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  border: none;
+  background-color: #f1f1f1;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background-color: #0088ff82;
+}
+
+.delete-button:hover {
+  background-color: #ff00158c;
+}
+
+@media (max-width: 768px) {
+  .note-card {
+    flex: 1 1 100%;
+    max-width: none;
+  }
+  main {
+    align-items: stretch;
+  }
+  main .create-note {
+    width: auto;
+  }
+  .form-search {
+    width: 100%;
+    padding-right: 0px;
+  }
+  .form-search div {
+    margin-left: 10px;
+    width: 100%;
+  }
+  .form-search-input {
+    width: 100%;
+  }
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Заметки</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1><i class="material-icons">description</i>Заметки</h1>
+    <div class="center">
+      <div class="form-search">
+        <div>
+          <button class="form-search-button" aria-label="Поиск" aria-hidden="false">
+            <i class="material-icons">search</i>
+          </button>
+          <input class="form-search-input" type="text" autocomplete="off" placeholder="Поиск" aria-hidden="false">
+          <button class="form-search-clear" aria-label="Очистить поле поиска" aria-hidden="false">
+            <i class="material-icons">close</i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <button class="download-notes-button" aria-label="Скачать заметки" title="Скачать заметки">
+      <i class="material-icons">download</i>
+    </button>
+  </header>
+
+  <main>
+    <div class="create-note">
+      <input class="create-note-title" placeholder="Введите заголовок" tabindex="0" spellcheck="true" >
+      <textarea class="create-note-text" placeholder="Заметка..." tabindex="1" spellcheck="true" ></textarea>
+      <div class="create-note-control">
+        <button class="create-note-close">Закрыть</button>
+      </div>
+    </div>
+    <div class="note-list"></div>
+  </main>
+  <script src="script.js"></script>
+</body>
+
+</html>
+

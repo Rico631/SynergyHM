@@ -1,0 +1,18 @@
+body {
+  background-color: #f0f8ff;
+  color: #00008b;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+a {
+  text-decoration: underline;
+}
+
+img {
+  width: 300px;
+}

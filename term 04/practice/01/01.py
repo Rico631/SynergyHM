@@ -49,3 +49,20 @@ for i, test in enumerate(test_cases):
     print("Массив:", test["A"], "| B =", test["B"])
     print("Результат:", result)
     print()
+
+
+# Тест 1:
+# Массив: [1, -2, 3, 4, -5] | B = 2
+# Результат: {'sum_positive': 8, 'count_positive': 3, 'count_greater_B': 2, 'mult_greater_B': 12}
+# Тест 2:
+# Массив: [-1, -2, -3] | B = 0
+# Результат: {'sum_positive': 0, 'count_positive': 0, 'count_greater_B': 0, 'mult_greater_B': 1}
+# Тест 3:
+# Массив: [] | B = 5
+# Результат: {'sum_positive': 0, 'count_positive': 0, 'count_greater_B': 0, 'mult_greater_B': 1}
+# Тест 4:
+# Массив: [10, 20, 30] | B = 5
+# Результат: {'sum_positive': 60, 'count_positive': 3, 'count_greater_B': 3, 'mult_greater_B': 6000}
+# Тест 5:
+# Массив: [5, -3, 6, 2, 1] | B = 10
+# Результат: {'sum_positive': 14, 'count_positive': 4, 'count_greater_B': 0, 'mult_greater_B': 1}

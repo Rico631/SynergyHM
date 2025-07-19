@@ -13,7 +13,7 @@ def processArray(A, B):
     for x in A:
         # Если элемент положительный
         if x > 0:
-            sum_positive += x   # Добавляем его к сумме
+            sum_positive += x   #d Добавляем его к сумме
             count_positive += 1 # Увеличиваем счётчик положительных
 
         # Если элемент больше B
@@ -33,7 +33,6 @@ def processArray(A, B):
         "mult_greater_B": mult_greater_B        # Произведение элементов больше B
     }
 
-
 # Массив тестовых случаев
 test_cases = [
     {"A": [1, -2, 3, 4, -5], "B": 2}, # Есть положительные, есть элементы > B
@@ -51,7 +50,7 @@ for i, test in enumerate(test_cases):
     print(f"Тест {i+1}:")
     print("Массив:", test["A"], "| B =", test["B"])
     print("Результат:", result)
-    print()
+    # print()
 
 
 # Тест 1:

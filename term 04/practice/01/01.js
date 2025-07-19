@@ -22,9 +22,9 @@ function processArray(A, B) {
       multGreaterB *= x; // Умножаем произведение на этот элемент
     }
   }
-
+  // Если счётчик чисел больше B равен 0
   if(countGreaterB == 0)
-    multGreaterB = 0
+    multGreaterB = 0 // Произведение = 0
 
   // Возвращаем объект с результатами
   return {

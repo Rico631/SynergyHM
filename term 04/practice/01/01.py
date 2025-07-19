@@ -21,6 +21,10 @@ def processArray(A, B):
             count_greater_B += 1 # Увеличиваем счётчик чисел больше B
             mult_greater_B *= x  # Умножаем произведение на этот элемент
 
+    # Если счётчик чисел больше B равен 0
+    if count_greater_B == 0:
+        mult_greater_B = 0 # Произведение = 0
+        
     # Возвращаем объект с результатами
     return {
         "sum_positive": sum_positive,           # Сумма положительных элементов
@@ -55,13 +59,13 @@ for i, test in enumerate(test_cases):
 # Результат: {'sum_positive': 8, 'count_positive': 3, 'count_greater_B': 2, 'mult_greater_B': 12}
 # Тест 2:
 # Массив: [-1, -2, -3] | B = 0
-# Результат: {'sum_positive': 0, 'count_positive': 0, 'count_greater_B': 0, 'mult_greater_B': 1}
+# Результат: {'sum_positive': 0, 'count_positive': 0, 'count_greater_B': 0, 'mult_greater_B': 0}
 # Тест 3:
 # Массив: [] | B = 5
-# Результат: {'sum_positive': 0, 'count_positive': 0, 'count_greater_B': 0, 'mult_greater_B': 1}
+# Результат: {'sum_positive': 0, 'count_positive': 0, 'count_greater_B': 0, 'mult_greater_B': 0}
 # Тест 4:
 # Массив: [10, 20, 30] | B = 5
 # Результат: {'sum_positive': 60, 'count_positive': 3, 'count_greater_B': 3, 'mult_greater_B': 6000}
 # Тест 5:
 # Массив: [5, -3, 6, 2, 1] | B = 10
-# Результат: {'sum_positive': 14, 'count_positive': 4, 'count_greater_B': 0, 'mult_greater_B': 1}
+# Результат: {'sum_positive': 14, 'count_positive': 4, 'count_greater_B': 0, 'mult_greater_B': 0}

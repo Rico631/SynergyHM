@@ -1,10 +1,62 @@
-﻿namespace WorkerApp;
+﻿namespace WorkerApp.Extensions;
 
 /// <summary>
 /// Методы расширения Console
 /// </summary>
 public class ConsoleExt
 {
+    /// <summary>
+    /// Считывает выбор пользователя в заданном диапазоне
+    /// </summary>
+    public static int ReadChoice(int min, int max)
+    {
+        while (true)
+        {
+            string? input = Console.ReadLine();
+            if (int.TryParse(input, out int result) && result >= min && result <= max)
+            {
+                return result;
+            }
+
+            // Подсказка при ошибке (выводим в ту же строку или с новой)
+            Console.Write($"Некорректный ввод. Выберите число от {min} до {max}: ");
+        }
+    }
+
+    /// <summary>
+    /// Считывает год рождения с проверкой на адекватность
+    /// </summary>
+    public static int ReadBirthYear(string prompt)
+    {
+        int currentYear = DateTime.Now.Year;
+        int minYear = Math.Max(1900, currentYear - 120);
+
+        while (true)
+        {
+            Console.Write(prompt);
+            string? input = Console.ReadLine();
+
+            if (int.TryParse(input, out int year))
+            {
+                if (year >= minYear && year <= currentYear)
+                {
+                    return year;
+                }
+                else if (year > currentYear)
+                {
+                    Console.WriteLine($"Ошибка: год рождения не может быть больше текущего ({currentYear}).");
+                }
+                else
+                {
+                    Console.WriteLine($"Ошибка: год рождения должен быть не раньше {minYear}).");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ошибка: введите корректный год (целое число).");
+            }
+        }
+    }
 
     /// <summary>
     /// Ввод непустой строки.

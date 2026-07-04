@@ -1,55 +1,64 @@
-﻿using WorkerApp;
+﻿using WorkerApp.Extensions;
+using WorkerApp.Models;
 
 List<Worker> workers = [];
 
 Console.WriteLine("==========================================");
-Console.WriteLine("   Учет сотрудников Университета");
+Console.WriteLine("   Учёт сотрудников Университета");
 Console.WriteLine("==========================================\n");
 
 int count = ConsoleExt.ReadPositiveInt("Введите количество сотрудников: ");
 
 for (int i = 0; i < count; i++)
 {
-    Console.WriteLine($"\nСотрудник №{i + 1}");
+    Console.WriteLine($"\n--- Сотрудник №{i + 1} ---");
+    Console.WriteLine("Тип: 1 — Преподаватель, 2 — Администратор, 3 — Менеджер, 4 — Простой сотрудник");
+    int type = ConsoleExt.ReadChoice(1, 4);
 
     string name = ConsoleExt.ReadString("Фамилия и инициалы: ");
-    string position = ConsoleExt.ReadString("Должность: ");
-    decimal salary = ConsoleExt.ReadSalary("Зарплата: ");
-    int hireYear = ConsoleExt.ReadHireYear("Год поступления на работу: ");
+    int birthYear = ConsoleExt.ReadBirthYear("Год рождения: ");
+    decimal salary = ConsoleExt.ReadSalary("Базовая зарплата: ");
+    int hireYear = ConsoleExt.ReadHireYear("Год приёма на работу: ");
 
-    workers.Add(new Worker(name, position, salary, hireYear));
+    Worker worker = type switch
+    {
+        1 => new Teacher(name, birthYear, salary, hireYear,
+                         ConsoleExt.ReadString("Кафедра: "),
+                         ConsoleExt.ReadString("Звание (Ассистент/Старший преподаватель/Доцент/Профессор): "),
+                         ConsoleExt.ReadPositiveInt("Количество дисциплин: ")),
+        2 => new Administrator(name, birthYear, salary, hireYear,
+                               ConsoleExt.ReadString("Отдел: "),
+                               ConsoleExt.ReadString("Уровень доступа: ")),
+        3 => new Manager(name, birthYear, salary, hireYear,
+                         ConsoleExt.ReadPositiveInt("Количество подчинённых: ")),
+        _ => new Worker(name, birthYear,
+                        ConsoleExt.ReadString("Должность: "), salary, hireYear),
+    };
+
+    workers.Add(worker);
 }
 
 Console.WriteLine("\n==========================================");
-Console.WriteLine("Список сотрудников");
+Console.WriteLine("Список сотрудников (полиморфный вывод)");
 Console.WriteLine("==========================================");
 
-foreach (Worker worker in workers)
-{
-    worker.Display();
-}
+foreach (Worker w in workers) // полиморфизм: вызывается Display соответствующего подкласса
+    w.Display();
 
-int experience = ConsoleExt.ReadPositiveInt(
-    "\nВведите минимальный стаж работы (лет): ");
-
+int minExp = ConsoleExt.ReadPositiveInt("\nМинимальный стаж работы (лет): ");
 bool found = false;
 
-Console.WriteLine($"\nСотрудники со стажем более {experience} лет:");
-
-foreach (Worker worker in workers)
+Console.WriteLine($"\nСотрудники со стажем более {minExp} лет:");
+foreach (Worker w in workers)
 {
-    if (worker.GetExperience() > experience)
+    if (w.Experience > minExp)
     {
-        Console.WriteLine(worker.GetName());
+        Console.WriteLine($" • {w.GetInfo()}"); // полиморфный вызов
         found = true;
     }
 }
 
-if (!found)
-{
-    Console.WriteLine("Сотрудников с указанным стажем не найдено.");
-}
+if (!found) Console.WriteLine("Сотрудников с указанным стажем не найдено.");
 
-Console.WriteLine("\nНажмите любую клавишу для завершения программы...");
+Console.WriteLine("\nНажмите любую клавишу для выхода...");
 Console.ReadKey();
-        
